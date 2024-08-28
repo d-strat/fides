@@ -14,11 +14,11 @@ from fides.protocols.peer_list import PeerListUpdateProtocol
 from fides.protocols.recommendation import RecommendationProtocol
 from fides.protocols.threat_intelligence import ThreatIntelligenceProtocol
 from fides.utils.logger import LoggerPrintCallbacks, Logger
-from slips.messaging.queue import RedisQueue, RedisSimplexQueue
-from slips.originals.abstracts import Module
-from slips.originals.database import __database__
-from slips.persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
-from slips.persistance.trust import SlipsTrustDatabase
+from fidesModule.messaging.queue import RedisQueue, RedisSimplexQueue
+from fidesModule.originals.abstracts import Module
+from fidesModule.originals.database import __database__
+from fidesModule.persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
+from fidesModule.persistance.trust import SlipsTrustDatabase
 
 logger = Logger("SlipsFidesModule")
 
