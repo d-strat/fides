@@ -9,23 +9,23 @@ import sys
 from dataclasses import asdict
 from multiprocessing import Process
 
-from messaging.message_handler import MessageHandler
-from messaging.network_bridge import NetworkBridge
-from model.configuration import load_configuration
-from model.threat_intelligence import SlipsThreatIntelligence
-from protocols.alert import AlertProtocol
-from protocols.initial_trusl import InitialTrustProtocol
-from protocols.opinion import OpinionAggregator
-from protocols.peer_list import PeerListUpdateProtocol
-from protocols.recommendation import RecommendationProtocol
-from protocols.threat_intelligence import ThreatIntelligenceProtocol
-from utils.logger import LoggerPrintCallbacks, Logger
+from slips_files.messaging.message_handler import MessageHandler
+from ..fidesModule.messaging.network_bridge import NetworkBridge
+from ..fidesModule.model.configuration import load_configuration
+from ..fidesModule.model.threat_intelligence import SlipsThreatIntelligence
+from ..fidesModule.protocols.alert import AlertProtocol
+from ..fidesModule.protocols.initial_trusl import InitialTrustProtocol
+from ..fidesModule.protocols.opinion import OpinionAggregator
+from ..fidesModule.protocols.peer_list import PeerListUpdateProtocol
+from ..fidesModule.protocols.recommendation import RecommendationProtocol
+from ..fidesModule.protocols.threat_intelligence import ThreatIntelligenceProtocol
+from ..fidesModule.utils.logger import LoggerPrintCallbacks, Logger
 
-from messaging.queueF import RedisQueue, RedisSimplexQueue
-from originals.abstracts import Module
-from originals.database import __database__
-from persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
-from persistance.trust import SlipsTrustDatabase
+from ..fidesModule.messaging.queueF import RedisQueue, RedisSimplexQueue
+from ..fidesModule.originals.abstracts import Module
+from ..fidesModule.originals.database import __database__
+from ..fidesModule.persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
+from ..fidesModule.persistance.trust import SlipsTrustDatabase
 
 logger = Logger("SlipsFidesModule")
 
