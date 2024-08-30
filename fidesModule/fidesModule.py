@@ -1,8 +1,7 @@
 # Must imports
 from slips_files.common.imports import *
 
-# Import the fides class (add a layer of abstraction)
-from module import SlipsFidesModule
+import os
 
 # original module imports
 import json
@@ -38,7 +37,7 @@ class fidesModule(IModule):
     def init(self):
         # Process.__init__(self) done by IModule
         self.__output = self.logger
-        # TODO: [S+] add path to trust model configuration yaml to the slips conf
+        slips_conf = os.path.join('config', 'fides.conf.yml')
         self.__slips_config = slips_conf # TODO give it path to config file and move the config file to module
 
         # connect to slips database
