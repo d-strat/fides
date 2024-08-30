@@ -27,6 +27,7 @@ from fidesModule.originals.database import __database__
 from fidesModule.persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
 from fidesModule.persistance.trust import SlipsTrustDatabase
 
+logger = Logger("SlipsFidesModule")
 
 class fidesModule(IModule):
     # Name: short name of the module. Do not use spaces
@@ -44,8 +45,8 @@ class fidesModule(IModule):
         #__database__.start(slips_conf) # __database__ replaced by self.db from IModule, no need ot start it
 
         # IModule has its own logger, no set-up
-        # LoggerPrintCallbacks.clear()
-        # LoggerPrintCallbacks.append(self.__format_and_print)
+        LoggerPrintCallbacks.clear()
+        LoggerPrintCallbacks.append(self.__format_and_print)
 
         # load trust model configuration
         self.__trust_model_config = load_configuration(self.__slips_config.trust_model_path) # TODO fix this to make it work under new management
@@ -104,16 +105,55 @@ class fidesModule(IModule):
         # and finally execute listener
         self.__bridge.listen(message_handler, block=False)
 
+    def __network_opinion_callback(self, ti: SlipsThreatIntelligence):
+        """This is executed every time when trust model was able to create an aggregated network opinion."""
+        logger.info(f'Callback: Target: {ti.target}, Score: {ti.score}, Confidence: {ti.confidence}.')
+        # TODO: [S+] document that we're sending this type
+        self.__slips_fides.send(json.dumps(asdict(ti)))
+
+    def __format_and_print(self, level: str, msg: str):
+        # TODO: [S+] determine correct level for trust model log levels
+        self.__output.put(f"33|{self.name}|{level} {msg}")
+
     def pre_main(self):
         """
         Initializations that run only once before the main() function runs in a loop
         """
         # utils.drop_root_privs()
+        self.__setup_trust_model()
+
 
     def main(self):
         """Main loop function"""
-        if msg := self.get_msg("new_ip"):
-            # Example of printing the number of profiles in the
-            # Database every second
-            data = len(self.db.getProfiles())
-            self.print(f"Amount of profiles: {data}", 3, 0)
+        try:
+            message = self.__slips_fides.get_message(timeout_seconds=0.1)
+            # if there's no string data message we can continue in waiting
+            if not message \
+                    or not message['data'] \
+                    or type(message['data']) != str:
+                return # REPLACE old continue
+            # handle case when the Slips decide to stop the process
+            if message['data'] == 'stop_process':
+                # Confirm that the module is done processing
+                __database__.publish('finished_modules', self.name)
+                return True
+            data = json.loads(message['data'])
+
+            # TODO: [S+] document that we need this structure
+            # data types
+            if data['type'] == 'alert':
+                self.__alerts.dispatch_alert(target=data['target'],
+                                                confidence=data['confidence'],
+                                                score=data['score'])
+            elif data['type'] == 'intelligence_request':
+                self.__intelligence.request_data(target=data['target'])
+            else:
+                logger.warn(f"Unhandled message! {message['data']}", message)
+
+        except KeyboardInterrupt:
+            # On KeyboardInterrupt, slips.py sends a stop_process msg to all modules, so continue to receive it
+            return # REPLACE old continue
+        except Exception as ex:
+            exception_line = sys.exc_info()[2].tb_lineno
+            logger.error(f'Problem on the run() line {exception_line}, {ex}.')
+            return True
