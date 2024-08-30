@@ -1,3 +1,6 @@
+# Aim of this fork
+This fork was crated in order to update slips module of fides, which is at least 2 years outdated. Part of necessary TODOs were also finished.
+
 # Fides: Trust Model for Collaborative Network Defence
 
 This project is funded by [NlNet NGI Zero Entrust](https://nlnet.nl/project/Iris-P2P/)
