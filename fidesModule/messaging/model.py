@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import Any
 
-from fides.model.aliases import PeerId, Target
-from fides.model.peer import PeerInfo
-from fides.model.recommendation import Recommendation
-from fides.model.threat_intelligence import ThreatIntelligence
+from ..model.aliases import PeerId, Target
+from ..model.peer import PeerInfo
+from ..model.recommendation import Recommendation
+from ..model.threat_intelligence import ThreatIntelligence
 
 """
 Model data coming from the Redis queue - 

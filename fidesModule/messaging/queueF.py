@@ -3,8 +3,8 @@ from typing import Callable, Optional
 
 from redis.client import Redis
 
-from fides.messaging.queue import Queue
-from fides.utils.logger import Logger
+from ..messaging.queue import Queue
+from ..utils.logger import Logger
 
 logger = Logger(__name__)
 

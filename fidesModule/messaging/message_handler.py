@@ -2,13 +2,13 @@ from typing import Dict, List, Callable, Optional, Union
 
 from ..messaging.dacite import from_dict
 
-from fides.messaging.model import NetworkMessage, PeerInfo, \
+from ..messaging.model import NetworkMessage, PeerInfo, \
     PeerIntelligenceResponse, PeerRecommendationResponse
-from fides.model.alert import Alert
-from fides.model.aliases import PeerId, Target
-from fides.model.recommendation import Recommendation
-from fides.model.threat_intelligence import ThreatIntelligence
-from fides.utils.logger import Logger
+from ..model.alert import Alert
+from ..model.aliases import PeerId, Target
+from ..model.recommendation import Recommendation
+from ..model.threat_intelligence import ThreatIntelligence
+from ..utils.logger import Logger
 
 logger = Logger(__name__)
 

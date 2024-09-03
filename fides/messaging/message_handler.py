@@ -2,7 +2,7 @@ from typing import Dict, List, Callable, Optional, Union
 
 from dacite import from_dict
 
-from fides.messaging.model import NetworkMessage, PeerInfo, \
+from ..messaging.model import NetworkMessage, PeerInfo, \
     PeerIntelligenceResponse, PeerRecommendationResponse
 from fides.model.alert import Alert
 from fides.model.aliases import PeerId, Target

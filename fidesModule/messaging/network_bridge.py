@@ -2,16 +2,16 @@ import json
 from dataclasses import asdict
 from typing import Dict, List
 
-from dacite import from_dict
+from .dacite import from_dict
 
-from fides.messaging.message_handler import MessageHandler
-from fides.messaging.model import NetworkMessage
-from fides.messaging.queue import Queue
-from fides.model.alert import Alert
-from fides.model.aliases import PeerId, Target
-from fides.model.recommendation import Recommendation
-from fides.model.threat_intelligence import ThreatIntelligence
-from fides.utils.logger import Logger
+from .message_handler import MessageHandler
+from .model import NetworkMessage
+from .queue import Queue
+from ..model.alert import Alert
+from ..model.aliases import PeerId, Target
+from ..model.recommendation import Recommendation
+from ..model.threat_intelligence import ThreatIntelligence
+from ..utils.logger import Logger
 
 logger = Logger(__name__)
 
