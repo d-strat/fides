@@ -1,6 +1,8 @@
 # Must imports
 from slips_files.common.imports import *
 
+from slips_files.common.parsers.config_parser import ConfigParser # solves slips_config
+
 import os
 
 # original module imports
@@ -38,8 +40,10 @@ class fidesModule(IModule):
     def init(self):
         # Process.__init__(self) done by IModule
         self.__output = self.logger
-        slips_conf = os.path.join('config', 'fides.conf.yml')
-        self.__slips_config = slips_conf # TODO give it path to config file and move the config file to module
+        
+        # slips_conf = os.path.join('config', 'fides.conf.yml')
+        # self.__slips_config = slips_conf # TODO give it path to config file and move the config file to module
+        self.read_configuration() # hope it works
 
         # connect to slips database
         #__database__.start(slips_conf) # __database__ replaced by self.db from IModule, no need ot start it
@@ -56,6 +60,11 @@ class fidesModule(IModule):
         self.__intelligence: ThreatIntelligenceProtocol
         self.__alerts: AlertProtocol
         self.__slips_fides: RedisQueue
+
+    def read_configuration(self) -> bool:
+        """reurns true if all necessary configs are present and read"""
+        conf = ConfigParser()
+        self.__slips_config = conf.export_to()
 
     def __setup_trust_model(self):
         r = self.db.rdb
