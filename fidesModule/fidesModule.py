@@ -41,8 +41,9 @@ class fidesModule(IModule):
         # Process.__init__(self) done by IModule
         self.__output = self.logger
         
-        # slips_conf = os.path.join('config', 'fides.conf.yml')
-        # self.__slips_config = slips_conf # TODO give it path to config file and move the config file to module
+        slips_conf = os.path.join('modules', 'fidesModule', 'config', 'fides.conf.yml')
+
+        # self.__slips_config = slips_conf # TODONE give it path to config file and move the config file to module
         self.read_configuration() # hope it works
 
         # connect to slips database
@@ -53,7 +54,9 @@ class fidesModule(IModule):
         LoggerPrintCallbacks.append(self.__format_and_print)
 
         # load trust model configuration
-        self.__trust_model_config = load_configuration(self.__slips_config.trust_model_path) # TODO fix this to make it work under new management
+        #self.__trust_model_config = load_configuration(self.__slips_config.trust_model_path) # TODO fix this to make it work under new management
+        self.__trust_model_config = load_configuration(slips_conf) # TODO fix this to make it work under new management
+
 
         # prepare variables for global protocols
         self.__bridge: NetworkBridge
