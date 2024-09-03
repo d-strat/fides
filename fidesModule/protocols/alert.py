@@ -1,16 +1,16 @@
 from typing import Callable
 
-from fides.evaluation.service.interaction import Weight, SatisfactionLevels
-from fides.messaging.network_bridge import NetworkBridge
-from fides.model.alert import Alert
-from fides.model.aliases import Target
-from fides.model.configuration import TrustModelConfiguration
-from fides.model.peer import PeerInfo
-from fides.model.threat_intelligence import ThreatIntelligence, SlipsThreatIntelligence
-from fides.persistence.trust import TrustDatabase
-from fides.protocols.initial_trusl import InitialTrustProtocol
-from fides.protocols.opinion import OpinionAggregator
-from fides.protocols.protocol import Protocol
+from ..evaluation.service.interaction import Weight, SatisfactionLevels
+from ..messaging.network_bridge import NetworkBridge
+from ..model.alert import Alert
+from ..model.aliases import Target
+from ..model.configuration import TrustModelConfiguration
+from ..model.peer import PeerInfo
+from ..model.threat_intelligence import ThreatIntelligence, SlipsThreatIntelligence
+from ..persistence.trust import TrustDatabase
+from ..protocols.initial_trusl import InitialTrustProtocol
+from ..protocols.opinion import OpinionAggregator
+from ..protocols.protocol import Protocol
 
 
 class AlertProtocol(Protocol):

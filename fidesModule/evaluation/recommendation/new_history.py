@@ -1,8 +1,8 @@
-from ..model.configuration import TrustModelConfiguration
-from ..model.peer_trust_data import PeerTrustData
-from ..model.recommendation import Recommendation
-from ..model.recommendation_history import RecommendationHistoryRecord, RecommendationHistory
-from ..utils.time import now
+from ...model.configuration import TrustModelConfiguration
+from ...model.peer_trust_data import PeerTrustData
+from ...model.recommendation import Recommendation
+from ...model.recommendation_history import RecommendationHistoryRecord, RecommendationHistory
+from ...utils.time import now
 
 
 def create_recommendation_history_for_peer(

@@ -1,10 +1,10 @@
 from typing import List
 
-from fides.messaging.network_bridge import NetworkBridge
-from fides.model.peer import PeerInfo
-from fides.persistence.trust import TrustDatabase
-from fides.protocols.initial_trusl import InitialTrustProtocol
-from fides.protocols.recommendation import RecommendationProtocol
+from ..messaging.network_bridge import NetworkBridge
+from ..model.peer import PeerInfo
+from ..persistence.trust import TrustDatabase
+from ..protocols.initial_trusl import InitialTrustProtocol
+from ..protocols.recommendation import RecommendationProtocol
 
 
 class PeerListUpdateProtocol:

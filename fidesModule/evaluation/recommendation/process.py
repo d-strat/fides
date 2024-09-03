@@ -1,13 +1,13 @@
 import dataclasses
 from typing import Dict
 
-from ..evaluation.discount_factor import compute_discount_factor
-from ..evaluation.recommendation.new_history import create_recommendation_history_for_peer
-from ..evaluation.recommendation.peer_update import update_recommendation_data_for_peer
-from ..model.aliases import PeerId
-from ..model.configuration import TrustModelConfiguration
-from ..model.peer_trust_data import TrustMatrix, PeerTrustData
-from ..model.recommendation import Recommendation
+from ...evaluation.discount_factor import compute_discount_factor
+from ...evaluation.recommendation.new_history import create_recommendation_history_for_peer
+from ...evaluation.recommendation.peer_update import update_recommendation_data_for_peer
+from ...model.aliases import PeerId
+from ...model.configuration import TrustModelConfiguration
+from ...model.peer_trust_data import TrustMatrix, PeerTrustData
+from ...model.recommendation import Recommendation
 
 
 def process_new_recommendations(

@@ -1,12 +1,12 @@
 from typing import Dict, Tuple
 
-from fides.evaluation.service.interaction import Satisfaction, Weight
-from fides.evaluation.service.process import process_service_interaction
-from fides.messaging.network_bridge import NetworkBridge
-from fides.model.aliases import PeerId
-from fides.model.configuration import TrustModelConfiguration
-from fides.model.peer_trust_data import PeerTrustData, TrustMatrix
-from fides.persistence.trust import TrustDatabase
+from ..evaluation.service.interaction import Satisfaction, Weight
+from ..evaluation.service.process import process_service_interaction
+from ..messaging.network_bridge import NetworkBridge
+from ..model.aliases import PeerId
+from ..model.configuration import TrustModelConfiguration
+from ..model.peer_trust_data import PeerTrustData, TrustMatrix
+from ..persistence.trust import TrustDatabase
 
 
 class Protocol:

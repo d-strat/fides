@@ -2,10 +2,10 @@ from typing import Optional
 
 from redis.client import Redis
 
-from fides.model.aliases import Target
-from fides.model.configuration import TrustModelConfiguration
-from fides.model.threat_intelligence import SlipsThreatIntelligence
-from fides.persistence.threat_intelligence import ThreatIntelligenceDatabase
+from ..model.aliases import Target
+from ..model.configuration import TrustModelConfiguration
+from ..model.threat_intelligence import SlipsThreatIntelligence
+from ..persistence.threat_intelligence import ThreatIntelligenceDatabase
 
 
 class SlipsThreatIntelligenceDatabase(ThreatIntelligenceDatabase):

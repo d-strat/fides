@@ -1,33 +1,32 @@
 from typing import List, Optional, Union
 
-from redis.client import Redis
-
 from ..messaging.model import PeerInfo
 from ..model.aliases import PeerId, Target, OrganisationId
 from ..model.configuration import TrustModelConfiguration
 from ..model.peer_trust_data import PeerTrustData, TrustMatrix
 from ..model.threat_intelligence import SlipsThreatIntelligence
-from ..persistence.trust import TrustDatabase
 
 
-# because this will be implemented
-# noinspection DuplicatedCode
-class SlipsTrustDatabase(TrustDatabase):
-    """Trust database implementation that uses Slips redis as a storage."""
+class TrustDatabase:
+    """Class responsible for persisting data for trust model."""
 
-    # TODO: [S] implement this
+    def __init__(self, configuration: TrustModelConfiguration):
+        self.__configuration = configuration
 
-    def __init__(self, configuration: TrustModelConfiguration, r: Redis):
-        super().__init__(configuration)
-        self.__r = r
+    def get_model_configuration(self) -> TrustModelConfiguration:
+        """Returns current trust model configuration if set."""
+        return self.__configuration
 
     def store_connected_peers_list(self, current_peers: List[PeerInfo]):
         """Stores list of peers that are directly connected to the Slips."""
-
         raise NotImplemented()
 
     def get_connected_peers(self) -> List[PeerInfo]:
         """Returns list of peers that are directly connected to the Slips."""
+        raise NotImplemented()
+
+    def get_peers_info(self, peer_ids: List[PeerId]) -> List[PeerInfo]:
+        """Returns list of peer infos for given ids."""
         raise NotImplemented()
 
     def get_peers_with_organisations(self, organisations: List[OrganisationId]) -> List[PeerInfo]:
@@ -36,6 +35,10 @@ class SlipsTrustDatabase(TrustDatabase):
 
     def get_peers_with_geq_recommendation_trust(self, minimal_recommendation_trust: float) -> List[PeerInfo]:
         """Returns peers that have >= recommendation_trust then the minimal."""
+        raise NotImplemented()
+
+    def get_peers_with_geq_service_trust(self, minimal_service_trust: float) -> List[PeerInfo]:
+        """Returns peers that have >= service_trust then the minimal."""
         raise NotImplemented()
 
     def store_peer_trust_data(self, trust_data: PeerTrustData):
@@ -53,7 +56,8 @@ class SlipsTrustDatabase(TrustDatabase):
 
     def get_peers_trust_data(self, peer_ids: List[Union[PeerId, PeerInfo]]) -> TrustMatrix:
         """Return trust data for each peer from peer_ids."""
-        return {peer_id: self.get_peer_trust_data(peer_id) for peer_id in peer_ids}
+        data = [self.get_peer_trust_data(peer_id) for peer_id in peer_ids]
+        return {peer.peer_id: peer for peer in data if peer}
 
     def cache_network_opinion(self, ti: SlipsThreatIntelligence):
         """Caches aggregated opinion on given target."""

@@ -1,7 +1,7 @@
 from math import sqrt
 from typing import Dict, List
 
-from ..model.aliases import PeerId
+from ...model.aliases import PeerId
 
 
 def select_trustworthy_peers_for_recommendations(

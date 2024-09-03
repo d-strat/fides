@@ -1,20 +1,20 @@
 from typing import List, Callable, Optional
 
-from fides.evaluation.service.interaction import Weight, SatisfactionLevels
-from fides.evaluation.ti_evaluation import TIEvaluation
-from fides.messaging.model import PeerIntelligenceResponse
-from fides.messaging.network_bridge import NetworkBridge
-from fides.model.aliases import Target
-from fides.model.configuration import TrustModelConfiguration
-from fides.model.peer import PeerInfo
-from fides.model.peer_trust_data import PeerTrustData
-from fides.model.threat_intelligence import ThreatIntelligence, SlipsThreatIntelligence
-from fides.persistence.threat_intelligence import ThreatIntelligenceDatabase
-from fides.persistence.trust import TrustDatabase
-from fides.protocols.initial_trusl import InitialTrustProtocol
-from fides.protocols.opinion import OpinionAggregator
-from fides.protocols.protocol import Protocol
-from fides.utils.logger import Logger
+from ..evaluation.service.interaction import Weight, SatisfactionLevels
+from ..evaluation.ti_evaluation import TIEvaluation
+from ..messaging.model import PeerIntelligenceResponse
+from ..messaging.network_bridge import NetworkBridge
+from ..model.aliases import Target
+from ..model.configuration import TrustModelConfiguration
+from ..model.peer import PeerInfo
+from ..model.peer_trust_data import PeerTrustData
+from ..model.threat_intelligence import ThreatIntelligence, SlipsThreatIntelligence
+from ..persistence.threat_intelligence import ThreatIntelligenceDatabase
+from ..persistence.trust import TrustDatabase
+from ..protocols.initial_trusl import InitialTrustProtocol
+from ..protocols.opinion import OpinionAggregator
+from ..protocols.protocol import Protocol
+from ..utils.logger import Logger
 
 logger = Logger(__name__)
 

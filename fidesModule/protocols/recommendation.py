@@ -1,17 +1,17 @@
 import math
 from typing import List, Optional
 
-from fides.evaluation.recommendation.process import process_new_recommendations
-from fides.evaluation.service.interaction import Weight, SatisfactionLevels
-from fides.messaging.model import PeerRecommendationResponse
-from fides.messaging.network_bridge import NetworkBridge
-from fides.model.aliases import PeerId
-from fides.model.configuration import TrustModelConfiguration
-from fides.model.peer import PeerInfo
-from fides.model.recommendation import Recommendation
-from fides.persistence.trust import TrustDatabase
-from fides.protocols.protocol import Protocol
-from fides.utils.logger import Logger
+from ..evaluation.recommendation.process import process_new_recommendations
+from ..evaluation.service.interaction import Weight, SatisfactionLevels
+from ..messaging.model import PeerRecommendationResponse
+from ..messaging.network_bridge import NetworkBridge
+from ..model.aliases import PeerId
+from ..model.configuration import TrustModelConfiguration
+from ..model.peer import PeerInfo
+from ..model.recommendation import Recommendation
+from ..persistence.trust import TrustDatabase
+from ..protocols.protocol import Protocol
+from ..utils.logger import Logger
 
 logger = Logger(__name__)
 

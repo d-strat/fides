@@ -2,11 +2,11 @@ import dataclasses
 from math import sqrt
 from typing import List
 
-from ..evaluation.discount_factor import compute_discount_factor
-from ..model.configuration import TrustModelConfiguration
-from ..model.peer_trust_data import PeerTrustData
-from ..model.service_history import ServiceHistory
-from ..utils import bound
+from ...evaluation.discount_factor import compute_discount_factor
+from ...model.configuration import TrustModelConfiguration
+from ...model.peer_trust_data import PeerTrustData
+from ...model.service_history import ServiceHistory
+from ...utils import bound
 
 
 # noinspection DuplicatedCode

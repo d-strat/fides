@@ -1,13 +1,13 @@
 from typing import Dict
 
-from fides.evaluation.ti_aggregation import TIAggregation, PeerReport
-from fides.messaging.model import PeerIntelligenceResponse
-from fides.model.alert import Alert
-from fides.model.aliases import PeerId, Target
-from fides.model.configuration import TrustModelConfiguration
-from fides.model.peer_trust_data import PeerTrustData, TrustMatrix
-from fides.model.threat_intelligence import SlipsThreatIntelligence
-from fides.persistence.threat_intelligence import ThreatIntelligenceDatabase
+from ..evaluation.ti_aggregation import TIAggregation, PeerReport
+from ..messaging.model import PeerIntelligenceResponse
+from ..model.alert import Alert
+from ..model.aliases import PeerId, Target
+from ..model.configuration import TrustModelConfiguration
+from ..model.peer_trust_data import PeerTrustData, TrustMatrix
+from ..model.threat_intelligence import SlipsThreatIntelligence
+from ..persistence.threat_intelligence import ThreatIntelligenceDatabase
 
 
 class OpinionAggregator:
