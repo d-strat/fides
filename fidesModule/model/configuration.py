@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import List, Union
 
-from fides.evaluation.ti_aggregation import TIAggregationStrategy, TIAggregation
-from fides.evaluation.ti_evaluation import TIEvaluation, EvaluationStrategy
-from fides.model.aliases import OrganisationId, PeerId
-from fides.utils.logger import Logger
+from ..evaluation.ti_aggregation import TIAggregationStrategy, TIAggregation
+from ..evaluation.ti_evaluation import TIEvaluation, EvaluationStrategy
+from ..model.aliases import OrganisationId, PeerId
+from ..utils.logger import Logger
 
 
 @dataclass(frozen=True)

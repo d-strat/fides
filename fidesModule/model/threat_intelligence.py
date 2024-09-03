@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from fides.model.aliases import Target, ConfidentialityLevel, Score, Confidence
+from ..model.aliases import Target, ConfidentialityLevel, Score, Confidence
 
 
 @dataclass

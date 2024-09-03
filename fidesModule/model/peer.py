@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from fides.model.aliases import PeerId, OrganisationId, IP
+from ..model.aliases import PeerId, OrganisationId, IP
 
 
 @dataclass

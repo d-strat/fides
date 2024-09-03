@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from fides.model.aliases import Target
-from fides.model.threat_intelligence import ThreatIntelligence
+from ..model.aliases import Target
+from ..model.threat_intelligence import ThreatIntelligence
 
 
 @dataclass

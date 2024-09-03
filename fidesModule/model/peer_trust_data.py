@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from typing import Dict, List
 
-from fides.model.aliases import PeerId, OrganisationId
-from fides.model.peer import PeerInfo
-from fides.model.recommendation_history import RecommendationHistory
-from fides.model.service_history import ServiceHistory
+from ..model.aliases import PeerId, OrganisationId
+from ..model.peer import PeerInfo
+from ..model.recommendation_history import RecommendationHistory
+from ..model.service_history import ServiceHistory
 
 
 @dataclass

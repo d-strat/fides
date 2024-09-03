@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from fides.utils.time import Time
+from ..utils.time import Time
 
 
 @dataclass
