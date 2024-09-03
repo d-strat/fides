@@ -10,22 +10,22 @@ from dataclasses import asdict
 from multiprocessing import Process
 
 
-from slips_files.messaging.message_handler import MessageHandler
-from ..modules.fidesModule.messaging.network_bridge import NetworkBridge
-from ..modules.fidesModule.model.configuration import load_configuration
-from ..modules.fidesModule.model.threat_intelligence import SlipsThreatIntelligence
-from ..modules.fidesModule.protocols.alert import AlertProtocol
-from ..modules.fidesModule.protocols.initial_trusl import InitialTrustProtocol
-from ..modules.fidesModule.protocols.opinion import OpinionAggregator
-from ..modules.fidesModule.protocols.peer_list import PeerListUpdateProtocol
-from ..modules.fidesModule.protocols.recommendation import RecommendationProtocol
-from ..modules.fidesModule.protocols.threat_intelligence import ThreatIntelligenceProtocol
-from ..modules.fidesModule.utils.logger import LoggerPrintCallbacks, Logger
-from ..modules.fidesModule.messaging.queueF import RedisQueue, RedisSimplexQueue
-from ..modules.fidesModule.originals.abstracts import Module
-from ..modules.fidesModule.originals.database import __database__
-from ..modules.fidesModule.persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
-from ..modules.fidesModule.persistance.trust import SlipsTrustDatabase
+from ..fidesModule.messaging.message_handler import MessageHandler
+from ..fidesModule.messaging.network_bridge import NetworkBridge
+from ..fidesModule.model.configuration import load_configuration
+from ..fidesModule.model.threat_intelligence import SlipsThreatIntelligence
+from ..fidesModule.protocols.alert import AlertProtocol
+from ..fidesModule.protocols.initial_trusl import InitialTrustProtocol
+from ..fidesModule.protocols.opinion import OpinionAggregator
+from ..fidesModule.protocols.peer_list import PeerListUpdateProtocol
+from ..fidesModule.protocols.recommendation import RecommendationProtocol
+from ..fidesModule.protocols.threat_intelligence import ThreatIntelligenceProtocol
+from ..fidesModule.utils.logger import LoggerPrintCallbacks, Logger
+from ..fidesModule.messaging.queueF import RedisQueue, RedisSimplexQueue
+from ..fidesModule.originals.abstracts import Module
+from ..fidesModule.originals.database import __database__
+from ..fidesModule.persistance.threat_intelligence import SlipsThreatIntelligenceDatabase
+from ..fidesModule.persistance.trust import SlipsTrustDatabase
 
 logger = Logger("SlipsFidesModule")
 

@@ -1,6 +1,6 @@
 from typing import Dict, List, Callable, Optional, Union
 
-from dacite import from_dict
+from ..messaging.dacite import from_dict
 
 from fides.messaging.model import NetworkMessage, PeerInfo, \
     PeerIntelligenceResponse, PeerRecommendationResponse
