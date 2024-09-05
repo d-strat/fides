@@ -166,6 +166,7 @@ class fidesModule(IModule):
                     self.__intelligence.request_data(target=data['target'])
                 else:
                     logger.warn(f"Unhandled message! {message['data']}", message)
+                    
 
         except KeyboardInterrupt:
             # On KeyboardInterrupt, slips.py sends a stop_process msg to all modules, so continue to receive it
