@@ -35,7 +35,7 @@ class fidesModule(IModule):
     # Name: short name of the module. Do not use spaces
     name = "Fides"
     description = "Trust computation module for P2P interactions."
-    authors = ['Lukas Forst', 'Martin Repa', 'David Otta']
+    authors = ['David Otta']
 
     def init(self):
         # Process.__init__(self) done by IModule
@@ -55,7 +55,7 @@ class fidesModule(IModule):
 
         # load trust model configuration
         #self.__trust_model_config = load_configuration(self.__slips_config.trust_model_path) # TODO fix this to make it work under new management
-        self.__trust_model_config = load_configuration(slips_conf) # TODO fix this to make it work under new management
+        self.__trust_model_config = load_configuration(slips_conf)
 
 
         # prepare variables for global protocols
@@ -71,30 +71,39 @@ class fidesModule(IModule):
 
     def __setup_trust_model(self):
         r = self.db.rdb
+        #print("-1-", end="")
+
 
         # TODO: [S] launch network layer binary if necessary
 
         # create database wrappers for Slips using Redis
         trust_db = SlipsTrustDatabase(self.__trust_model_config, r)
+        #print("-2-", end="")
         ti_db = SlipsThreatIntelligenceDatabase(self.__trust_model_config, r)
+        #print("-3-", end="")
 
         # create queues
         # TODO: [S] check if we need to use duplex or simplex queue for communication with network module
         network_fides_queue = RedisSimplexQueue(r, send_channel='fides2network', received_channel='network2fides')
-        slips_fides_queue = RedisSimplexQueue(r, send_channel='fides2slips', received_channel='slips2fides')
+        #print("-3.5-", end="")
+        # 1 # slips_fides_queue = RedisSimplexQueue(r, send_channel='fides2slips', received_channel='slips2fides')
+        #print("-4-", end="")
 
         bridge = NetworkBridge(network_fides_queue)
+        #print("-5-", end="")
 
         recommendations = RecommendationProtocol(self.__trust_model_config, trust_db, bridge)
         trust = InitialTrustProtocol(trust_db, self.__trust_model_config, recommendations)
         peer_list = PeerListUpdateProtocol(trust_db, bridge, recommendations, trust)
         opinion = OpinionAggregator(self.__trust_model_config, ti_db, self.__trust_model_config.ti_aggregation_strategy)
+        #print("-6-", end="")
 
         intelligence = ThreatIntelligenceProtocol(trust_db, ti_db, bridge, self.__trust_model_config, opinion, trust,
                                                   self.__slips_config.interaction_evaluation_strategy,
                                                   self.__network_opinion_callback)
         alert = AlertProtocol(trust_db, bridge, trust, self.__trust_model_config, opinion,
                               self.__network_opinion_callback)
+        #print("-7-", end="")
 
         # TODO: [S+] add on_unknown and on_error handlers if necessary
         message_handler = MessageHandler(
@@ -107,15 +116,21 @@ class fidesModule(IModule):
             on_unknown=None,
             on_error=None
         )
+        #print("-8-", end="")
 
         # bind local vars
         self.__bridge = bridge
         self.__intelligence = intelligence
         self.__alerts = alert
-        self.__slips_fides = slips_fides_queue
-
+        # 1 # self.__slips_fides = slips_fides_queue
+        self.__channel_slips_fides = self.db.subscribe("fides_d")
         # and finally execute listener
         self.__bridge.listen(message_handler, block=False)
+        #print("-9-", end="")
+
+        self.channels = {
+            "fides_d": self.__channel_slips_fides,
+        }
 
     def __network_opinion_callback(self, ti: SlipsThreatIntelligence):
         """This is executed every time when trust model was able to create an aggregated network opinion."""
@@ -131,14 +146,19 @@ class fidesModule(IModule):
         """
         Initializations that run only once before the main() function runs in a loop
         """
+        #print("~", end="")
         # utils.drop_root_privs()
         self.__setup_trust_model()
+        #print("~", end="")
 
 
     def main(self):
+        print("+", end="")
         """Main loop function"""
         try:
-            message = self.__slips_fides.get_message(timeout_seconds=0.1)
+            #message = self.__slips_fides.get_message(timeout_seconds=0.1)
+            if msg := self.get_msg("tw_modified"):
+                received_msg = msg["data"]
             # if there's no string data message we can continue in waiting
             if not message \
                     or not message['data'] \
