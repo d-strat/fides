@@ -154,33 +154,30 @@ class fidesModule(IModule):
 
     def main(self):
         print("+", end="")
-        """Main loop function"""
         try:
             #message = self.__slips_fides.get_message(timeout_seconds=0.1)
             if msg := self.get_msg("tw_modified"):
                 received_msg = msg["data"]
-            # if there's no string data message we can continue in waiting
-            if not message \
-                    or not message['data'] \
-                    or type(message['data']) != str:
-                return # REPLACE old continue
-            # handle case when the Slips decide to stop the process
-            if message['data'] == 'stop_process':
-                # Confirm that the module is done processing
-                __database__.publish('finished_modules', self.name)
-                return True
-            data = json.loads(message['data'])
+                # if there's no string data message we can continue in waiting
+                if not message['data'] or type(message['data']) != str:
+                    return
+                """ # handle case when the Slips decide to stop the process ## LOOKS LIKE THIS IS NO LONGER NECESSARY
+                if message['data'] == 'stop_process':
+                    # Confirm that the module is done processing
+                    __database__.publish('finished_modules', self.name)
+                    return True
+                data = json.loads(message['data']) """
 
-            # TODO: [S+] document that we need this structure
-            # data types
-            if data['type'] == 'alert':
-                self.__alerts.dispatch_alert(target=data['target'],
-                                                confidence=data['confidence'],
-                                                score=data['score'])
-            elif data['type'] == 'intelligence_request':
-                self.__intelligence.request_data(target=data['target'])
-            else:
-                logger.warn(f"Unhandled message! {message['data']}", message)
+                # TODO: [S+] document that we need this structure
+                # data types
+                if data['type'] == 'alert':
+                    self.__alerts.dispatch_alert(target=data['target'],
+                                                    confidence=data['confidence'],
+                                                    score=data['score'])
+                elif data['type'] == 'intelligence_request':
+                    self.__intelligence.request_data(target=data['target'])
+                else:
+                    logger.warn(f"Unhandled message! {message['data']}", message)
 
         except KeyboardInterrupt:
             # On KeyboardInterrupt, slips.py sends a stop_process msg to all modules, so continue to receive it
