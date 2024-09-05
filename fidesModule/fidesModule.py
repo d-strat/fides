@@ -73,9 +73,6 @@ class fidesModule(IModule):
         r = self.db.rdb
         #print("-1-", end="")
 
-
-        # TODO: [S] launch network layer binary if necessary
-
         # create database wrappers for Slips using Redis
         trust_db = SlipsTrustDatabase(self.__trust_model_config, r)
         #print("-2-", end="")
@@ -155,21 +152,12 @@ class fidesModule(IModule):
     def main(self):
         print("+", end="")
         try:
-            #message = self.__slips_fides.get_message(timeout_seconds=0.1)
             if msg := self.get_msg("tw_modified"):
-                received_msg = msg["data"]
                 # if there's no string data message we can continue in waiting
-                if not message['data'] or type(message['data']) != str:
+                if not msg['data']:# or type(msg['data']) != str:
                     return
-                """ # handle case when the Slips decide to stop the process ## LOOKS LIKE THIS IS NO LONGER NECESSARY
-                if message['data'] == 'stop_process':
-                    # Confirm that the module is done processing
-                    __database__.publish('finished_modules', self.name)
-                    return True
-                data = json.loads(message['data']) """
+                data = json.loads(msg['data'])
 
-                # TODO: [S+] document that we need this structure
-                # data types
                 if data['type'] == 'alert':
                     self.__alerts.dispatch_alert(target=data['target'],
                                                     confidence=data['confidence'],
